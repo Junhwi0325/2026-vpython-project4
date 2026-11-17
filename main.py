@@ -1,5 +1,7 @@
 Web VPython 3.2
 airplain = box(texture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6BhoAXCd3G5bZFzborXqBr-FAU5jQJj-qfaNadgkOZAQAvbj-FkwRFcA&s=10", size=vec(1, 1, 0.0001), pos = vec(0,-5,0))
+back = box(texture = "https://raw.githubusercontent.com/Junhwi0325/2026-vpython-project/5647d77a4dd7e809f4b6eca37bcf568a0acee326/1794897378797.jpg", size= vec(20, 30, 0.0001), pos= vec(0, 0, -1))
+scene.camera.pos = vector(0, 0, 10)
 import random
 dt = 0.01
 ta = []
@@ -8,9 +10,13 @@ t1 = 0
 t2 = 0
 t3 = 0
 t4 = 0
+
 while True :
+   
+     
     rate(100)
     k = keysdown()
+    
    
    
     if 'a'in k :
@@ -50,7 +56,7 @@ while True :
        
    
     if ' ' in k and  t2 >= 0.3 :
-        ball = sphere(pos = vec(airplain.pos.x, -5, 0), radius = 0.05, v= vec(0, 50, 0))
+        ball = sphere(pos = vec(airplain.pos.x, -5, 0), radius = 0.1, v= vec(0, 50, 0), color = color.red)
         ta.append(ball)
         t2 = 0
     for ball in ta :
@@ -60,8 +66,13 @@ while True :
                 ball.visible = False
     for enemy in en :
         for ball in ta :
+           
+            
             if abs(ball.pos.y - enemy.pos.y) < 0.7 and abs(ball.pos.x - enemy.pos.x) < 0.7  :
                 en.remove(enemy)
                 enemy.visible = False
                 ta.remove(ball)
                 ball.visible = False
+    for enemy in en :
+        if abs(airplain.pos.y - enemy.pos.y) < 1 and abs(airplain.pos.x - enemy.pos.x) < 1  :
+            airplain.visible = False
